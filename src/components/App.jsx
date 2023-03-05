@@ -21,10 +21,13 @@ export class App extends Component {
   }
 
   componentDidMount() {
-    const savedContacts = JSON.parse(localStorage.getItem('contacts'));
-    if (savedContacts) {
-      this.setState({ contacts: savedContacts });
+    const savedContacts = localStorage.getItem('contacts');
+    if (savedContacts !== null) {
+      const parsedContacts = JSON.parse(savedContacts);
+      this.setState({ contacts: parsedContacts });
+      return;
     }
+    this.setState({ contacts: [] });
   }
 
   addContact = ({ name, number }) => {
